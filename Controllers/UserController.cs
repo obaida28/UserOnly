@@ -32,8 +32,10 @@ public class UserController : ControllerFather
         var adressAll = await _context.Addresses.ToListAsync();
         var res = userAll.Join(adressAll,user => user.Id , adrs => adrs.UserId , 
         (user,adrs) => new {
-            uname = user.name , pass = user.password , m1 = user.mobile2 , m2 = user.mobile2 ,
-            adres = adrs.address
+            u_id = user.Id , user_name = user.name , 
+            //pass = user.password ,
+             first_mobile = user.mobile2 , second_mobile = user.mobile2 ,
+            address = adrs.address
         }
         );
 

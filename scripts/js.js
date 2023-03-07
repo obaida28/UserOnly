@@ -23,7 +23,7 @@ function row_from_json(data, tableName){
 
 export function table(data, tableName) {  
     let show = document.querySelector("#" + tableName);
-    show.innerHTML = col_from_json(data, tableName) + row_from_json(data, tableName);
+    show.innerHTML += col_from_json(data, tableName) + row_from_json(data, tableName);
 }
 const connect = async(FullURL , option) => {
     let data = await fetch(FullURL,option)
