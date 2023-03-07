@@ -20,6 +20,7 @@ function row_from_json(data, tableName){
     }
     return `<tbody>` + out + `</tbody>`;
 }
+
 export function table(data, tableName) {  
     let show = document.querySelector("#" + tableName);
     show.innerHTML = col_from_json(data, tableName) + row_from_json(data, tableName);
