@@ -1,29 +1,46 @@
-function col_from_json(data , tableName){
+function col_from_json(data){
     var cols = Object.keys(data[0]);
     var cols_str = '';
     for(let col of cols) cols_str += `<th>${col} </th>`;
     return `<thead> <tr>` + cols_str + `</tr> </thead>`;           
 }
-function row_from_json(data, tableName){
+function row_from_json_v2(data){
     var cols = Object.keys(data[0]);
     let out = '';
-    for(let i = 0 ; i < data.length ; ++i){
-        out += `<tr>`;
-        for(let col of cols) {
-            var col_val = data[i][col];
-            if(col != 'date')
-                out += '<td> ' + col_val +  ' </td>';
+    for(let i = 0 ; i < data.length ; ++i)
+    {
+        let rowOut = '';
+        for(let col of cols) 
+        {
+            const isDate = col == 'date';
+            let col_val = data[i][col].toString().split(",");
+            let result = '';
+            if(col_val.length > 1)
+            {
+                let drop = '';
+                for(let obj of col_val) drop += '<p> ' + (isDate ? toDate(obj) : obj) +  ' </p>';
+                result = 
+                `<div class="dropdown">
+                    <span class="span_drp">show</span>
+                    <div class="dropdown-content">` 
+                    + drop + 
+                    `</div> 
+                </div>`;     
+            }
             else
-                out += '<td> ' + new Date(col_val).toLocaleDateString() +  ' </td>'; 
+                result = isDate ? toDate(col_val) : col_val;
+            rowOut += '<td>' + result +  ' </td>';
         }
-        out += ` </tr> `;
+        out += `<tr>` + rowOut +` </tr> `;
     }
     return `<tbody>` + out + `</tbody>`;
 }
-
+function toDate(date){
+    return new Date(date).toLocaleDateString();
+}
 export function table(data, tableName) {  
     let show = document.querySelector("#" + tableName);
-    show.innerHTML += col_from_json(data, tableName) + row_from_json(data, tableName);
+    show.innerHTML = col_from_json(data) + row_from_json_v2(data);
 }
 const connect = async(FullURL , option) => {
     let data = await fetch(FullURL,option)
