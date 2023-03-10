@@ -5,22 +5,24 @@ public class UserController : ControllerFather
     [HttpPost(Name = "signUp")]
     public async Task<IActionResult> addnew(UserDTO userDTO)
     {
-        // var u = new User 
-        // { 
-        //    name = userDTO.name  , password = userDTO.password ,
-        //     mobile1 = userDTO.mobile1 , mobile2 = userDTO.mobile2
-        // };
-        // _context.Add(u);
-        // foreach (var ad in userDTO.Addresses)
-        // {
-        //     var adrs = new Address()
-        //     {
-        //         address = ad ,
-        //         User = u
-        //     };
-        //     _context.Addresses.Add(adrs);
-        // }
-        // await _context.SaveChangesAsync();
+        var u = new User 
+        { 
+           name = userDTO.name  , password = userDTO.password ,
+           mobile1 = userDTO.mobile1 , mobile2 = userDTO.mobile2
+        };
+        _context.Add(u);
+        var list = new List<Address>();
+        foreach(var str in userDTO.Addresses)
+        {
+            list.Add(new Address()
+            {
+                address = str ,
+                User = u
+            }
+        );
+        }
+        _context.Addresses.AddRange(list);
+        await _context.SaveChangesAsync();
         return Ok("Ok");
     }
     [HttpGet(Name = "getAll")]

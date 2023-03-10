@@ -69,3 +69,11 @@ export const post = async(FullURL,body) =>{
     }
     return await connect(FullURL,option);
 }
+export function log(data){
+    const deploymentTime = true;
+    if(deploymentTime)
+        console.log(data);
+}
+export function getByName(name){
+    return document.querySelector('[name="' + name +'"]').value;
+}

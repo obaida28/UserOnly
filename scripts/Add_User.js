@@ -1,13 +1,14 @@
-// const nameText = "name"
-// //const ButtonAdd = "addEmployee"
 import { AddEmp } from "./api.js"
-import { table } from "./js.js"
+import { log , getByName } from "./js.js"
 const FormAdd = "add_User"
-// //AddEmp(nameText);
+const User_name = "name"
+const password = "psw"
+const mobile1 = "mobile1"
+const mobile2 = "mobile2"
 var fromAdd = document.getElementById(FormAdd);
-// var EmpName = document.getElementById(nameText);
 fromAdd.addEventListener("submit", (e)=>{
     e.preventDefault()
-    AddEmp("a","s","1231231230","0001112223","obaida");
+    const adrs = ["obaida" , "A"];
+    AddEmp(getByName(User_name),getByName(password),getByName(mobile1),getByName(mobile2),adrs);
     fromAdd.reset();
-    });
+});

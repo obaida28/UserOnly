@@ -7,10 +7,9 @@ const getAllUsers = async () => {
 }
 //second EndPoint
 const AddEmp = async (name,pass,mob1,mob2,adrs) => {
-    const body = { 'name': name , 'password':pass , 'mobile1':mob1 , 'mobile2':mob2 , 'Addresses': adrs
-}
+    const body = { 'name': name , 'password':pass , 'mobile1':mob1 , 'mobile2':mob2 , 
+    'Addresses': adrs }
     const data = await post(mainURL + '/User',body);
-    alert(data)
-    //table(data,tableName);
+    console.log(data)
 }
 export {getAllUsers,AddEmp}
