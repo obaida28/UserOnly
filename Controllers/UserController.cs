@@ -3,7 +3,7 @@ public class UserController : ControllerFather
 {
     public UserController(ApplicationDbContext context):base(context){}
     [HttpPost(Name = "signUp")]
-    public async Task<IActionResult> addnew(UserDTO userDTO)
+    public async Task<IActionResult> add_user(UserDTO userDTO)
     {
         var u = new User 
         { 

@@ -12,4 +12,10 @@ const AddEmp = async (name,pass,mob1,mob2,adrs) => {
     const data = await post(mainURL + '/User',body);
     console.log(data)
 }
-export {getAllUsers,AddEmp}
+//second EndPoint
+const add_Address = async (adrs,User_id) => {
+    const body = { 'Addresses': adrs , 'User_id' : User_id }
+    const data = await post(mainURL + '/Address',body);
+    console.log(data)
+}
+export {getAllUsers,AddEmp , add_Address}
