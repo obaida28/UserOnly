@@ -1,4 +1,5 @@
 public class UserDTO{
+    public int u_id { get; set; } = 0;
     [MaxLength(length: 100)]
     public string name { get; set; }
     [MaxLength(length: 100)]

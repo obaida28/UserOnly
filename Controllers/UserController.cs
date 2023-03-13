@@ -23,7 +23,7 @@ public class UserController : ControllerFather
         }
         _context.Addresses.AddRange(list);
         await _context.SaveChangesAsync();
-        return Ok("Ok");
+        return Ok(u.Id);
     }
     [HttpGet(Name = "getAll")]
     public async Task<IActionResult> getAll()
@@ -36,7 +36,8 @@ public class UserController : ControllerFather
             (
                 new UserDTO
                 {
-                    name = user.name , mobile1 = user.mobile1 , mobile2 = user.mobile2, password = user.password ,
+                    u_id = user.Id , name = user.name , mobile1 = user.mobile1 , mobile2 = user.mobile2, 
+                    password = user.password ,
                     Addresses = _context.Addresses.Where(
                         ad => user.Id == ad.UserId).Select(ad=> ad.address).ToList()
                 }

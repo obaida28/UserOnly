@@ -1,12 +1,25 @@
 <html>
     <head>
         <script>
-            const str = "aaasas";
-            const myArray = str.split(",");
-            if(myArray.length > 1)
-                console.log(myArray.length);
-            else
-                console.log("S");
+            let str = "aaa , ccccc ,  bbbaaa";
+            //const myArray = ["s","aa","sx"]
+            // if(myArray.length > 1)
+            //     console.log(myArray.length);
+            // else
+            str = str.replace("aaa","z");
+                console.log(str);
+
+                const queryString = window.location.search;
+
+console.log(queryString);
+
+const queryString1 = window.location.search;
+
+const urlParams = new URLSearchParams(queryString1);
+
+const page_type = urlParams.get('id')
+
+console.log(page_type);
             </script>
     </head>
     <body></body>

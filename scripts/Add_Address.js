@@ -1,12 +1,21 @@
-import { add_Address } from "./api.js"
-import { log , getByName } from "./js.js"
-const FormAddAddress = "add_Address"
-const address = "address"
+import { add_address } from "./api/Address_api.js"
+import { log , getByName , submit , get_quary_string} from "./__main_js.js"
 
-// add address event
-document.getElementById(FormAddAddress).addEventListener("submit", (e)=>{
-    e.preventDefault()
+/* start attributes*/
+const form_add_address = "add_Address"
+const address = "address"
+const user_id = get_quary_string("u_id")
+/* end attributes*/
+
+/* start functions call apis*/
+// add user
+function function_add_address(){
     const adrs = [getByName(address)];
-    add_Address(adrs,1);
-    document.getElementById(FormAddAddress).reset();
-});
+    add_address(adrs,user_id);
+}
+/* end functions call apis*/
+
+/* start events*/
+// sign up event
+submit(form_add_address , function_add_address);
+/* end events*/
