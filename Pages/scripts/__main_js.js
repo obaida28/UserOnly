@@ -154,8 +154,8 @@ export function getByName(name){
 }
 export function URL(){
     const local = 'https://localhost:7106'
-    const online = 'http://clinichost-001-site1.ctempurl.com' 
-    const URL_ = local //change here if you want other type!
+    const online = 'http://www.obaida.somee.com/FirstProject' 
+    const URL_ = online //change here if you want other type!
     return URL_;
 }
 export function submit(form_id , functionAPI){
