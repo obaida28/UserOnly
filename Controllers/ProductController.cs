@@ -104,7 +104,6 @@ public class ProductController : ControllerFather
 //     //     _context.Employees.RemoveRange(emp);
 //     //     _context.SaveChanges();
 //     //     return Ok();    
-    
 /*       
  // var userAll = (from user in _context.Users
         //               join adrs in _context.Addresses
@@ -152,47 +151,9 @@ public class ProductController : ControllerFather
     [HttpGet(Name = "getTree")]
     public async Task<IActionResult> getTree()
     {
-        //var all = await _context.Groups.Include(g => (g as ProductBase).Products).ToListAsync();
-        //var all = await _context.Groups.Include(g => g.GroupParent).ToListAsync();
-        var list = new List<ProductDTO>();
         var allGroups = await _context.Groups.ToListAsync();
-        List<PGroup> childList = allGroups.Where(g => g.GroupParent == null).ToList();
-        IEnumerable<ProductBase> parentList = childList; 
-
-        parentList.ToList().ForEach(li => list.Add(
-            new ProductDTO(){
-                ele = li,
-                sons = new List<ProductBase>()
-            }
-        ));
-
-        list.ForEach(li => li.sons.AddRange(
-            allGroups.Where(g => g.GroupParent == li.ele).ToList()
-        ));
-
-
         var allProducts = await _context.Products.ToListAsync();
-        list.ForEach(li => li.sons.AddRange(
-            allProducts.Where(p => p.GroupParent == li.ele).ToList()
-        ));
-
-        /**/
-        // var pall = await _context.Products.ToListAsync();
-        // foreach(var a in all)
-        // {
-        //     a.addRange
-        //     (
-        //        pall.Where(p => p.GroupParent == a).ToList()
-        //     );
-        // }
-
-        // var q = (from all in v.A join b in v.B
-        // on a.i equals b.j
-        // where a.k == "aaa" && a.h == 0
-        // select new {T = a.i, Z = a.z })
-        // .AsEnumerable()
-        // .Select(x => new { T = x.T, S = someMethod(x.Z).ToString() })
-       // var all_ = all.Where(p => p.getCount() == 0);
+        var list = new ProductDTO().do_Tree(allGroups,allProducts);
         return Ok(list);
     }
 }

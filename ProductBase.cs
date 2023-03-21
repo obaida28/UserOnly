@@ -12,6 +12,4 @@ public abstract class ProductBase
     //public virtual void addRange(List<ProductBase> prods) { throw new Exception("It is not a group!"); }
     public virtual void addRange(List<PGroup> prods) { throw new Exception("It is not a group!"); }
     public virtual void remove(ProductBase prod) { throw new Exception("It is not a group!"); }
-    // [ForeignKey("bs")]
-    // public int? ProductBaseId { get; set; }
 }
