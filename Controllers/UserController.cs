@@ -28,22 +28,24 @@ public class UserController : ControllerFather
     [HttpGet(Name = "getAll")]
     public async Task<IActionResult> getAll()
     {
-        var userAll = await _context.Users.ToListAsync();
-        var list = new List<UserDTO>();
-        foreach(var user in userAll)
-        {
-            list.Add
-            (
-                new UserDTO
-                {
-                    u_id = user.Id , name = user.name , mobile1 = user.mobile1 , mobile2 = user.mobile2, 
-                    password = user.password ,
-                    Addresses = _context.Addresses.Where(
-                        ad => user.Id == ad.UserId).Select(ad=> ad.address).ToList()
-                }
-            );
-        }
-        return Ok(list);
+        var userAll = await _context.Users.Include(u => u.Addresses).ToListAsync();
+        return Ok(userAll);
+        // var userAll = await _context.Users.ToListAsync();
+        // var list = new List<UserDTO>();
+        // foreach(var user in userAll)
+        // {
+        //     list.Add
+        //     (
+        //         new UserDTO
+        //         {
+        //             u_id = user.Id , name = user.name , mobile1 = user.mobile1 , mobile2 = user.mobile2, 
+        //             password = user.password ,
+        //             Addresses = _context.Addresses.Where(
+        //                 ad => user.Id == ad.UserId).Select(ad=> ad.address).ToList()
+        //         }
+        //     );
+        // }
+        // return Ok(list);
     }
     // [HttpGet(template: "GetFilter")]
     // public async Task<IActionResult> GetFilter(string start)
